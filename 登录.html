@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/登录.css">
+    <script src="js/font-auto.js"></script>
+    <script src="js/zepto.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="return"><img src="img/return.gif" alt=""></div>
+            <div>账号登录</div>
+        </header>
+        <section>
+            <div class="logo"><img src="img/logo.gif" alt=""></div>
+            <div class="content">
+                <input type="text" class="user bb-grey" placeholder="请输入账号">
+                <input type="password" class="pwd bb-grey" placeholder="请输入密码">
+            </div>
+            <div class="submit grey" >登录</div>
+        </section>
+        <footer>登录遇到困难？请联系客服400-0000-0000</footer>
+    </div>
+</body>
+<script>
+    $(function(){
+        $('.user').on('input', function () {
+            console.log($(this).val())
+            if ($(this).val() != '') {
+                if ($(this).hasClass('bb-red')) {
+                    $(this).removeClass('bb-red')
+                }
+                 else {
+                    $(this).addClass('bb-grey')
+                }
+            } else {
+                if ($(this).hasClass('bb-grey')) {
+                    $(this).removeClass('bb-grey').addClass('bb-red')
+                } else {
+                    $(this).addClass('bb-red')
+                }
+            }
+            if ($(this).val() != '' && $('.pwd').val() != '') {
+                $('.submit').removeClass('grey').addClass('blue')
+            } else {
+                $('.submit').removeClass('blue').addClass('grey')
+            }
+        })
+        $('.pwd').on('input', function () {
+            console.log($('.user').val())
+            console.log($(this).val())
+            if ($('.user').val() != '' && $(this).val() != "") {
+                if ($(this).hasClass('bb-red')) {
+                    $(this).removeClass('bb-red')
+                } else {
+                    $(this).addClass('bb-grey')
+                }
+                $('.submit').removeClass('grey').addClass('blue')
+            } else {
+                if ($(this).hasClass('bb-grey')) {
+                    $(this).removeClass('bb-grey').addClass('bb-red')
+                } else {
+                    $(this).addClass('bb-red')
+                }
+                $('.submit').removeClass('blue').addClass('grey')
+            }
+        })
+        // 点击登录时判断
+        $('.submit').click(function(){
+            // localstorage存对象
+            var group = {
+                name:$('.user').val(),
+                pwd:$('.pwd').val()
+            }
+            sessionStorage.setItem('name',JSON.stringify(group))
+            if($(this).hasClass('blue')){
+                location.href = '首页.html'
+            }
+        })
+    })
+</script>
+</html>
